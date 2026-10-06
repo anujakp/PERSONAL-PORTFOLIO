@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { profile, skills, projects } from "./personal-portfolio"
+import { profile, skills, projects, photos } from "./personal-portfolio"
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api"
 
@@ -38,7 +38,7 @@ function App() {
         <a href="#home" className="brand" onClick={closeMenu}>YN<span>.</span></a>
         <button className="menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation">☰</button>
         <div className={`nav-links ${menuOpen ? "open" : ""}`}>
-          {["home", "about", "skills", "projects", "contact"].map(item => (
+          {["home", "about", "skills", "projects", "photos", "contact"].map(item => (
             <a key={item} href={`#${item}`} onClick={closeMenu}>{item}</a>
           ))}
         </div>
@@ -106,6 +106,7 @@ function App() {
             {projects.map((project, index) => (
               <article className="project" key={project.title}>
                 <div className="project-number">0{index + 1}</div>
+                <img className="project-image" src={project.image} alt={project.imageAlt} loading="lazy" />
                 <p className="project-category">{project.category}</p>
                 <h3>{project.title}</h3>
                 <p>{project.description}</p>
@@ -116,9 +117,25 @@ function App() {
           </div>
         </section>
 
+        <section id="photos" className="section">
+          <div className="section-heading">
+            <p className="eyebrow">04 — PHOTOS</p>
+            <h2>A few snapshots.</h2>
+            <p>Placeholder photos for now — replace these with your own pictures whenever you're ready.</p>
+          </div>
+          <div className="photos-grid">
+            {photos.map(photo => (
+              <figure className="photo-card" key={photo.title}>
+                <img src={photo.image} alt={photo.alt} loading="lazy" />
+                <figcaption>{photo.title}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+
         <section id="contact" className="section contact-section">
           <div className="section-heading">
-            <p className="eyebrow">04 — CONTACT</p>
+            <p className="eyebrow">05 — CONTACT</p>
             <h2>Let's build something.</h2>
             <p>Have a project, internship opportunity or idea? Send a message.</p>
           </div>
